@@ -1,5 +1,10 @@
 plugins {
+    application
     kotlin("jvm") version "1.6.10"
+}
+//similar to specifying the manifest's location
+application {
+    mainClass.set("com.learning.Application")
 }
 
 group = "com.learning"
