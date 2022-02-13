@@ -12,6 +12,9 @@ fun main() {
             get("/") {
                 call.respondText("Hello, world!")
             }
+            get("/norsk") {
+                call.respondText("Hallo og god morgen!")
+            }
         }
     }.start(wait = true)
 }
