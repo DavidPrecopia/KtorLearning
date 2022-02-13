@@ -4,7 +4,7 @@ plugins {
 }
 //similar to specifying the manifest's location
 application {
-    mainClass.set("com.learning.Application")
+    mainClass.set("com.learning.ApplicationKt")
 }
 
 group = "com.learning"
