@@ -5,6 +5,7 @@ val logbackVersion: String by project
 plugins {
     application
     kotlin("jvm") version "1.6.10"
+    kotlin("plugin.serialization") version "1.6.10"
 }
 //similar to specifying the manifest's location
 application {
@@ -27,7 +28,7 @@ dependencies {
     //engine
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     //parse serialized format (e.g., JSON) into and from Kotlin objects
-    implementation("io.ktor:ktor-serialization:$$ktorVersion")
+    implementation("io.ktor:ktor-serialization:$ktorVersion")
     //logging - based upon Log4j
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
