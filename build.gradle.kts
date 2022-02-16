@@ -1,3 +1,7 @@
+val kotlinVersion: String by project
+val ktorVersion: String by project
+val logbackVersion: String by project
+
 plugins {
     application
     kotlin("jvm") version "1.6.10"
@@ -17,10 +21,11 @@ repositories {
 dependencies {
     //importing Kotlin
     implementation(kotlin("stdlib"))
+
     //core ktor
-    implementation("io.ktor:ktor-server-core:1.6.7")
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
     //engine
-    implementation("io.ktor:ktor-server-netty:1.6.7")
+    implementation("io.ktor:ktor-server-netty:$ktorVersion")
     //logging - based upon Log4j
-    implementation("ch.qos.logback:logback-classic:1.2.10")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
 }
