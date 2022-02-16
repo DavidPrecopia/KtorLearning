@@ -26,6 +26,12 @@ dependencies {
     implementation("io.ktor:ktor-server-core:$ktorVersion")
     //engine
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
+    //parse serialized format (e.g., JSON) into and from Kotlin objects
+    implementation("io.ktor:ktor-serialization:$$ktorVersion")
     //logging - based upon Log4j
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+
+    //unit testing
+    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
