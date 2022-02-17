@@ -1,5 +1,6 @@
 package com.learning
 
+import com.learning.routes.registerCustomerRoutes
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.serialization.*
@@ -10,6 +11,9 @@ fun Application.module() {
     install(ContentNegotiation) {
         json()
     }
+
+    //invokes the extension function in CustomerRoutes
+    registerCustomerRoutes()
 }
 
 

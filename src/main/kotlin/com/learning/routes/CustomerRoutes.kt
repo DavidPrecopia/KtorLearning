@@ -8,6 +8,13 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
+//registering all of the below defined routes
+fun Application.registerCustomerRoutes() {
+    routing {
+        customerRouting()
+    }
+}
+
 //this is an extension function - I'm creating a function in the Route class.
 //I'm then invoking the route function to instantiate the route that will be used my the client.
 fun Route.customerRouting() {
