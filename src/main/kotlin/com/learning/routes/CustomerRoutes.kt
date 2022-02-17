@@ -24,10 +24,12 @@ fun Route.customerRouting() {
                 CUSTOMER_ID_MISSING_MALFORMED,
                 status = HttpStatusCode.NotFound
             )
+
             val customer = customerStorage.find { it.id == id } ?: return@get call.respondText(
                 CUSTOMER_NOT_FOUND + id,
                 status = HttpStatusCode.NotFound
             )
+
             call.respond(customer)
         }
         post {
@@ -40,7 +42,14 @@ fun Route.customerRouting() {
             )
         }
         delete("{id}") {
+            val id = call.parameters["id"] ?: return@delete call.respondText(
+                CUSTOMER_ID_MISSING_MALFORMED, status = HttpStatusCode.BadRequest
+            )
 
+            if (customerStorage.removeIf { it.id == id })
+                call.respondText(CUSTOMER_DELETED, status = HttpStatusCode.Accepted)
+            else
+                call.respondText(CUSTOMER_NOT_FOUND, status = HttpStatusCode.NotFound)
         }
     }
 }
