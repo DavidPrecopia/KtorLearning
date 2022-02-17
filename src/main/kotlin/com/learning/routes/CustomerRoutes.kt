@@ -11,13 +11,22 @@ import io.ktor.routing.*
 fun Route.customerRouting() {
     route("/customer") {
         get {
-                if (customerStorage.isEmpty())
-                call.respondText("No customers found", status = HttpStatusCode.NotFound)
+            if (customerStorage.isEmpty())
+                call.respondText(NO_CUSTOMERS, status = HttpStatusCode.NotFound)
             else
                 call.respond(customerStorage)
         }
         get("{id}") {
-
+            //the `return@get` is specifying to return from the sub-function `get`, not the entire function.
+            val id = call.parameters["id"] ?: return@get call.respondText(
+                CUSTOMER_ID_MISSING_MALFORMED,
+                status = HttpStatusCode.NotFound
+            )
+            val customer = customerStorage.find { it.id == id } ?: return@get call.respondText(
+                CUSTOMER_NOT_FOUND + id,
+                status = HttpStatusCode.NotFound
+            )
+            call.respond(customer)
         }
         post {
 
