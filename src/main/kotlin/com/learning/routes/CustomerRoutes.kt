@@ -1,8 +1,10 @@
 package com.learning.routes
 
+import com.learning.model.Customer
 import com.learning.model.customerStorage
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -29,7 +31,13 @@ fun Route.customerRouting() {
             call.respond(customer)
         }
         post {
-
+            //parse the received JSON into the Customer data class
+            val customer = call.receive<Customer>()
+            customerStorage.add(customer)
+            call.respondText(
+                CUSTOMER_STORED,
+                status = HttpStatusCode.Created //201
+            )
         }
         delete("{id}") {
 
