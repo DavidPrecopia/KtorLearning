@@ -1,8 +1,10 @@
 package com.learning.routes
 
+import com.learning.model.Order
 import com.learning.model.orderStorage
 import io.ktor.application.*
 import io.ktor.http.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
@@ -14,6 +16,7 @@ import io.ktor.routing.*
 fun Application.registerOrderRoutes() {
     routing {
         listOrdersRoute()
+        postOrder()
         getOrder()
         getOrderTotal()
     }
@@ -29,6 +32,17 @@ fun Route.listOrdersRoute() {
         if (orderStorage.isNotEmpty()) {
             call.respond(orderStorage)
         }
+    }
+}
+
+fun Route.postOrder() {
+    post(ORDERS_PATH_BASE) {
+        val order = call.receive<Order>()
+        orderStorage.add(order)
+        call.respondText(
+            ORDER_CREATED,
+            status = HttpStatusCode.Created
+        )
     }
 }
 

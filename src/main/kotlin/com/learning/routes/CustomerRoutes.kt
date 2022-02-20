@@ -48,7 +48,7 @@ fun Route.customerRouting() {
             val customer = call.receive<Customer>()
             customerStorage.add(customer)
             call.respondText(
-                CUSTOMER_STORED,
+                CUSTOMER_CREATED,
                 status = HttpStatusCode.Created //201
             )
         }

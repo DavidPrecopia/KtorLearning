@@ -3,7 +3,11 @@ package com.learning.model
 import kotlinx.serialization.Serializable
 
 //our Db for our orders.
-val orderStorage = listOf(
+val orderStorage = mutableListOf(
+    Order("2022", listOf(
+        OrderItem("6700 XT", 950.00, 1),
+        OrderItem("5600x", 279.99, 1)
+    )),
     Order("2020-04-06-01", listOf(
         OrderItem("ASUS ROG Desk Pad", 35.95, 1),
         OrderItem("Apple Pencil", 105.99, 2)
