@@ -8,7 +8,7 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-//registering all of the below defined routes
+//registering all the below defined routes
 fun Application.registerCustomerRoutes() {
     routing {
         customerRouting()
