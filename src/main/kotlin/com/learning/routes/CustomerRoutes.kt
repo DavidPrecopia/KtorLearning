@@ -28,17 +28,20 @@ fun Route.customerRouting() {
         get("{id}") {
             //the `return@get` is specifying to return from the sub-function `get`, not the entire function.
             val id = call.parameters["id"] ?: return@get call.respondText(
-                CUSTOMER_ID_MISSING_MALFORMED,
+                ID_MISSING_MALFORMED,
                 status = HttpStatusCode.NotFound
             )
 
+            //if the ID is not null, attempt to find it in our Customer Db.
             val customer = customerStorage.find { it.id == id } ?: return@get call.respondText(
                 CUSTOMER_NOT_FOUND + id,
                 status = HttpStatusCode.NotFound
             )
 
+            //finally, return the requested Customer.
             call.respond(customer)
         }
+        // POST == add
         post {
             //parse the received JSON into the Customer data class
             val customer = call.receive<Customer>()
@@ -49,10 +52,12 @@ fun Route.customerRouting() {
             )
         }
         delete("{id}") {
+            //similar to the GET ID path
             val id = call.parameters["id"] ?: return@delete call.respondText(
-                CUSTOMER_ID_MISSING_MALFORMED, status = HttpStatusCode.BadRequest
+                ID_MISSING_MALFORMED, status = HttpStatusCode.BadRequest
             )
 
+            //differing from GET ID by using an if-else statement.
             if (customerStorage.removeIf { it.id == id })
                 call.respondText(CUSTOMER_DELETED, status = HttpStatusCode.Accepted)
             else
