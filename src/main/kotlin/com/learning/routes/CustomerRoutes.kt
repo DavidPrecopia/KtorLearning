@@ -18,10 +18,11 @@ fun Application.registerCustomerRoutes() {
 //this is an extension function - I'm creating a function in the Route class.
 //I'm then invoking the route function to instantiate the route that will be used my the client.
 fun Route.customerRouting() {
+    //defining the root route, the defining the methods and path on it.
     route("/customer") {
         get {
             if (customerStorage.isEmpty())
-                call.respondText(NO_CUSTOMERS, status = HttpStatusCode.NotFound)
+                call.respondText(NO_CUSTOMERS_FOUND, status = HttpStatusCode.NotFound)
             else
                 call.respond(customerStorage)
         }

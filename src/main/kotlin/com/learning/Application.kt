@@ -1,6 +1,7 @@
 package com.learning
 
 import com.learning.routes.registerCustomerRoutes
+import com.learning.routes.registerOrderRoutes
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.serialization.*
@@ -12,8 +13,9 @@ fun Application.module() {
         json()
     }
 
-    //invokes the extension function in CustomerRoutes
+    //invokes the extension function in their respective Kt files
     registerCustomerRoutes()
+    registerOrderRoutes()
 }
 
 
