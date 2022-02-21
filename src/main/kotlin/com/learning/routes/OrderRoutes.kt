@@ -35,6 +35,22 @@ fun Route.listOrdersRoute() {
     }
 }
 
+fun Route.getOrder() {
+    get(ORDERS_PATH_BASE_ID) {
+        val id = call.parameters["id"] ?: call.respondText(
+            ID_MISSING_MALFORMED,
+            status = HttpStatusCode.NotFound
+        )
+
+        val order = orderStorage.find { it.orderNumber == id } ?: call.respondText(
+            ORDER_NOT_FOUND + id,
+            status = HttpStatusCode.NotFound
+        )
+
+        call.respond(order)
+    }
+}
+
 fun Route.postOrder() {
     post(ORDERS_PATH_BASE) {
         val order = call.receive<Order>()
@@ -43,22 +59,6 @@ fun Route.postOrder() {
             ORDER_CREATED,
             status = HttpStatusCode.Created
         )
-    }
-}
-
-fun Route.getOrder() {
-    get(ORDERS_PATH_GET) {
-        val id = call.parameters["id"] ?: call.respondText(
-            ID_MISSING_MALFORMED,
-            status = HttpStatusCode.NotFound
-        )
-
-        val order = orderStorage.find { it.orderNumber == id } ?: call.respondText(
-            ORDER_NOT_FOUND,
-            status = HttpStatusCode.NotFound
-        )
-
-        call.respond(order)
     }
 }
 

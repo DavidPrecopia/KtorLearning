@@ -19,7 +19,7 @@ fun Application.registerCustomerRoutes() {
 //I'm then invoking the route function to instantiate the route that will be used my the client.
 fun Route.customerRouting() {
     //defining the root route, the defining the methods and path on it.
-    route("/customer") {
+    route(CUSTOMER_PATH_BASE) {
         get {
             if (customerStorage.isEmpty())
                 call.respondText(NO_CUSTOMERS_FOUND, status = HttpStatusCode.NotFound)
@@ -62,7 +62,7 @@ fun Route.customerRouting() {
             if (customerStorage.removeIf { it.id == id })
                 call.respondText(CUSTOMER_DELETED, status = HttpStatusCode.Accepted)
             else
-                call.respondText(CUSTOMER_NOT_FOUND, status = HttpStatusCode.NotFound)
+                call.respondText(CUSTOMER_NOT_FOUND + id, status = HttpStatusCode.NotFound)
         }
     }
 }
