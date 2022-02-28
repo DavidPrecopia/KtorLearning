@@ -1,6 +1,7 @@
 val kotlinVersion: String by project
 val ktorVersion: String by project
 val logbackVersion: String by project
+val gsonVersion: String by project
 
 plugins {
     application
@@ -34,5 +35,8 @@ dependencies {
 
     //unit testing
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
+    //provides utility functions for assertions
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    //GSON
+    testImplementation("com.google.code.gson:gson:$gsonVersion")
 }
